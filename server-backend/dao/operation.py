@@ -16,4 +16,5 @@ class OperationDB(BaseDB):
         return self.connection[DATABASE][COLLECTION_OPERATION].delete_one(filter={'idx': idx}).deleted_count
 
     def find(self, **params: dict) -> list:
-        return [Operation(**c) for c in self.connection[DATABASE][COLLECTION_OPERATION].find(params, {'_id': 0})]
+        return [Operation(**c) for c in
+                self.connection[DATABASE][COLLECTION_OPERATION].find(params, {'_id': 0}).sort({'timestamp': -1})]

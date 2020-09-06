@@ -2,10 +2,13 @@ from model import Base
 
 
 class User(Base):
-    def __init__(self, idx: int = 0, uuid: str = None, session_id: str = None, timestamp: str = None):
+    def __init__(self, idx: int = 0, user_id: int = None, session_id: str = None,
+                 created_timestamp: str = None, updated_timestamp: str = None):
         self.idx = idx
-        self.uuid = uuid
+        self.user_id = user_id
         self.session_id = session_id
-        self.timestamp = timestamp
+        self.created_timestamp = created_timestamp
+        self.updated_timestamp = updated_timestamp
+
 
 
