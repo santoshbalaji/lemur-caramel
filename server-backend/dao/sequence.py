@@ -20,4 +20,4 @@ class SequenceDB(BaseDB):
 
     def increment_and_get_sequence(self, collection_name: str) -> dict:
         return self.connection[DATABASE][COLLECTION_SEQUENCE].find_one_and_update(
-            filter={'collection_name': collection_name}, update={'$inc': {'sequence_number': 1}})
+            filter={'collection_name': collection_name}, update={'$inc': {'sequence_number': 1}})['sequence_number']

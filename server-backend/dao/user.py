@@ -15,4 +15,4 @@ class UserDB(BaseDB):
         return self.connection[DATABASE][COLLECTION_USER].delete_one(filter={'idx': idx}).deleted_count
 
     def find(self, **params: dict) -> list:
-        return [User(**c) for c in self.connection[DATABASE][COLLECTION_USER].find(params, {'_id': 0})]
+        return [c for c in self.connection[DATABASE][COLLECTION_USER].find(**params)]

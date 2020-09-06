@@ -1,4 +1,4 @@
-from dao import BaseDB
+from dao.base import BaseDB
 from dao.constants import *
 from model import Operation
 
@@ -16,5 +16,5 @@ class OperationDB(BaseDB):
         return self.connection[DATABASE][COLLECTION_OPERATION].delete_one(filter={'idx': idx}).deleted_count
 
     def find(self, **params: dict) -> list:
-        return [Operation(**c) for c in
-                self.connection[DATABASE][COLLECTION_OPERATION].find(params, {'_id': 0}).sort({'timestamp': -1})]
+        return [c for c in
+                self.connection[DATABASE][COLLECTION_OPERATION].find(**params).sort('current_timestamp', -1)]

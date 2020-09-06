@@ -1,3 +1,5 @@
+import json
+
 from model import Base
 
 
@@ -11,5 +13,3 @@ class Operation(Base):
         self.status = status
         self.created_timestamp = created_timestamp
         self.updated_timestamp = updated_timestamp
-
-
