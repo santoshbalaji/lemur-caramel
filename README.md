@@ -15,7 +15,7 @@
 <img src="https://github.com/santoshbalaji/lemur-caramel/blob/master/images/oled.png" />
 
 ##### 2) Connecting LED to ESP8266 (for the current code connect 2 LED's to pin D3 and D4 respectively)
-<img src="https://github.com/santoshbalaji/blueberry-public/blob/master/images/led.png" />
+<img src="https://github.com/santoshbalaji/lemur-caramel/blob/master/images/led.png" />
 
 ##### 3) Dependencies for arduino modules <br>
    <a href="https://github.com/knolleary/pubsubclient.git">MQTT Library</a><br>
