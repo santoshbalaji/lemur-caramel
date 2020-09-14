@@ -42,3 +42,17 @@ Result Format
 }
 
 
+## Flask Rest API (Python based)
+
+### Information:
+
+##### 1) Install dependencies (Use python3)
+pip install -r requirements.txt
+
+##### 2) To start server (Use python3)
+python main.py 
+
+##### 3) Info on Running server (Multi Thread App Server) 
+Host: 127.0.0.1
+Port: 3000
+
