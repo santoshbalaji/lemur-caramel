@@ -1,3 +1,4 @@
+from flask import jsonify
 from dao import sequence_dao, user_dao
 from model import User
 from service.base import BaseService
@@ -11,10 +12,11 @@ class UserService(BaseService):
         try:
             user = User(**user)
             user.idx = sequence_dao.increment_and_get_sequence(SEQUENCE_COLLECTION_USER)
+            user.topic = 'frontend-' + str(user.idx) + "-" + str(user.user_id)
             user.created_timestamp = str(datetime.now())
             user_dao.create(obj=user)
-            self.logging.info(Message.USER_CREATED.format(user.idx))
-            return 200, Message.USER_CREATED.format(user.idx)
+            del user.__dict__['_id']
+            return 200, user.convert_to_db_format()
         except Exception as e:
             self.logging.error(Error.ERROR_USER_CREATE.format(str(e)))
             return 500, Error.ERROR_USER_CREATE.format(str(e))
