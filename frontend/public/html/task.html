@@ -29,21 +29,21 @@
                 <div class="content" style="color:#00B5AD">Caramel</div>
             </h2>
             <div class="ui large form">
-                <div class="ui secondary  segment">
+                <div class="ui secondary segment">
                     <div class="field">
-                        <input type="text" name="user_id" placeholder="User ID">
+                        <input type="number" id="user_id" placeholder="User ID" max="9999" min="1000">
                     </div>
                     <div class="field">
-                        <select class="ui dropdown" name="operation">
+                        <select class="ui dropdown" id="operation">
                             <option value="">Operation</option>
-                            <option value="1">Wash</option>
+                            <option value="WASH">Wash</option>
                         </select>
                     </div>
                     <div class="field">
-                        <select class="ui dropdown" name="mode">
+                        <select class="ui dropdown" id="mode">
                             <option value="">Mode</option>
-                            <option value="1">Quick Mode</option>
-                            <option value="2">Normal Mode</option>
+                            <option value="QUICK">Quick Mode</option>
+                            <option value="NORMAL">Normal Mode</option>
                         </select>              
                     </div>
                     <div class="ui fluid large teal submit button" id="go">Go</div>

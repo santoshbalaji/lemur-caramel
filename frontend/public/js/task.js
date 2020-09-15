@@ -30,7 +30,6 @@ function on_message_arrived(message)
     {
         if (message.destinationName === subscribers[i].name) 
         {
-            console.log(subscribers[i]);
             subscribers[i].callback(message.payloadString);
             break;
         }
@@ -40,41 +39,58 @@ function on_message_arrived(message)
 const go_callback = function () 
 {
     console.log("----------- go button clicked -----------");
-    var user_id = document.getElementsByName("user_id")[0].value;
-    var operation = document.getElementsByName("operation")[0].value;
-    var mode = document.getElementsByName("mode")[0].value;
-    if (user_id != undefined && operation != undefined && mode != undefined && user_id.trim().length != 0 && operation.trim().length != 0 && mode.trim().length != 0)
+    var user_id = document.getElementById("user_id").value;
+    var operation = document.getElementById("operation").value;
+    var mode = document.getElementById("mode").value;
+    if (user_id != undefined && 
+        operation != undefined && 
+        mode != undefined && 
+        Number.isInteger(Number(user_id)) && 
+        user_id.trim().length == 4 &&
+        operation.trim().length != 0 && 
+        mode.trim().length != 0)
     {
-        call_user_post();
+        document.getElementById('loader_text').innerText = "processing";
+        document.getElementById('loader').style.display = "block";
+        call_user_post(user_id, operation, mode);
+    }
+    else
+    {
+        window.alert("Missing data or it is of wrong format");
     }
 }
 
 const call_user_post = function(user_id, operation, mode)
 {
+    console.log("----------- calling user request -------------");
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:4000/caramel/users", true);
-    xhttp.setRequestHeader("Content-Type", "applicaiton/json");
+    xhttp.open("POST", "http://127.0.0.1:3000/caramel/users", true);
+    xhttp.setRequestHeader("Accept", "application/json")
+    xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function()
     {
         if(this.readyState == 4 && this.status == 200)
         {
             var response = JSON.parse(this.responseText);
             var subscriber = new Object();
-            subscriber.name = response.topic;
+            subscriber.name = response['topic'];
             subscriber.callback = status_callback;
             subscribers.push(subscriber);
-            initialise_mqtt('192.168.1.222', 1884, response.topic);
-            call_operations_post()
+            initialise_mqtt('192.168.1.222', 1884, response['topic']);
+            call_operations_post(response['idx'], operation, mode);
         }
-    }
-    xhttp.send(JSON.stringify({'user_id': user_id}));
+    } 
+    var data = JSON.stringify({'user_id': Number(user_id)});
+    xhttp.send(data);
 }
 
 const call_operations_post = function(user_id, operation, mode)
 {
+    console.log("--------------- calling operations request --------------");
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:4000/caramel/operations", true);
-    xhttp.setRequestHeader("Content-Type", "applicaiton/json");
+    xhttp.open("POST", "http://127.0.0.1:3000/caramel/operations");
+    xhttp.setRequestHeader("Accept", "application/json")
+    xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function()
     {
         if(this.readyState == 4 && this.status == 200)
@@ -91,7 +107,7 @@ const status_callback = function (message)
     message = JSON.parse(message);
     document.getElementById('loader_text').innerText = message.status;
     document.getElementById('loader').style.display = "block";
-    if (message.status === "Completed") 
+    if (message.status === "completed") 
     {
         setTimeout(function () 
         {
@@ -99,7 +115,6 @@ const status_callback = function (message)
         }, 4000);
     }
 }
-
 
 window.addEventListener("DOMContentLoaded", function()
 {
