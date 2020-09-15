@@ -7,7 +7,7 @@ user_get_parser = reqparse.RequestParser()
 user_get_parser.add_argument('id', type=int, location='args', help='id of user')
 
 
-@user_ns.route('/', methods=['GET', 'POST'])
+@user_ns.route('', methods=['GET', 'POST'])
 class UserController(Resource):
 
     @user_ns.doc(parser=user_get_parser)

@@ -7,7 +7,7 @@ operation_get_parser = reqparse.RequestParser()
 operation_get_parser.add_argument('status', type=str, location='args', help='status for operation')
 
 
-@operation_ns.route('/', methods=['GET', 'POST'])
+@operation_ns.route('', methods=['GET', 'POST'])
 class OperationController(Resource):
 
     @operation_ns.doc(parser=operation_get_parser)
