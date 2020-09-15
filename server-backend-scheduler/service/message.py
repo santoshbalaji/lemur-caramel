@@ -1,5 +1,7 @@
 class Message(object):
     OPERATION_UPDATED = 'Updated operation with id: {}'
+    OPERATION_NEXT_JOB_DONE = 'Next job may have been executed'
+    OPERATION_RESULT = 'Result of operation has been updated'
 
 
 class Error(object):

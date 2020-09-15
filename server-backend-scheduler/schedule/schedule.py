@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from schedule.constants import SCHEDULER_TIME
 from service import operation_service, OperationService
 import logging
 
@@ -10,7 +11,8 @@ class Schedule(object):
     def start_schedule(self) -> None:
         logging.info("------------ starting the schedule -----------")
         self.schedule = BackgroundScheduler(daemon=True)
-        self.schedule.add_job(id='send_next_job', func=self._send_next_job_to_iot, trigger='interval', kwargs={'service': operation_service}, seconds=10)
+        self.schedule.add_job(id='send_next_job', func=self._send_next_job_to_iot, trigger='interval',
+                              kwargs={'service': operation_service}, seconds=SCHEDULER_TIME)
         self.schedule.start()
 
     def stop_schedule(self) -> None:

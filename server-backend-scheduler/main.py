@@ -1,3 +1,4 @@
+import logging
 from dao import disconnect_database
 from schedule import Schedule
 from service import mqtt_connection
@@ -12,6 +13,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    logging.getLogger().setLevel(logging.INFO)
     main()
     text = ''
     while text != 'y':

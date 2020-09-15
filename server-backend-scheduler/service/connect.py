@@ -14,7 +14,7 @@ class MQTTConnection(object):
         logging.info("------------------ mqtt connected ----------------" + self.host)
 
     def _on_message(self, client: mqtt.Client, userdata: any, msg: mqtt.MQTTMessage) -> None:
-        logging.info("------------------ mqtt message received -------------" + msg.topic + "---------" + msg.payload)
+        logging.info("------------------ mqtt message received -------------")
         if msg.topic in self.subscribers:
             self.subscribers[msg.topic]['callback'](message=msg.payload)
 
@@ -27,7 +27,7 @@ class MQTTConnection(object):
         self.client.on_connect = self._on_connect
         self.client.on_message = self._on_message
         self.client.connect(host=self.host, port=self.port, keepalive=60)
-        self.client.subscribe(topic="test", qos=1)
+        self.client.loop_start()
         logging.info("-------------------- mqtt initialised -----------------")
 
     def subscribe_all(self, subscribers: list) -> None:
@@ -39,7 +39,4 @@ class MQTTConnection(object):
 
     def close(self) -> None:
         self.client.disconnect()
-
-
-def test_callback():
-    print("works")
+        logging.info("------------- disconnected from mqtt server ------------")

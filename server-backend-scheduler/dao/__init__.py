@@ -1,5 +1,5 @@
+import logging
 from pymongo import MongoClient
-
 from dao.user import UserDB
 from .base import BaseDB
 from .operation import OperationDB
@@ -15,3 +15,4 @@ user_dao = UserDB(connection=mongo_client)
 
 def disconnect_database():
     mongo_client.close()
+    logging.info("--------- disconnected from database ----------")
