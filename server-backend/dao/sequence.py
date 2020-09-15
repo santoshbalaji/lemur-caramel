@@ -1,4 +1,4 @@
-from dao import BaseDB
+from dao.base import BaseDB
 from dao.constants import DATABASE, COLLECTION_SEQUENCE
 from model import Sequence
 
