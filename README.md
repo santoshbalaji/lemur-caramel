@@ -75,5 +75,17 @@ pip install -r requirements.txt
 python main.py 
 
 
+## UI (Nodejs, Javascript, CSS, HTML)
+
+### Dependencies
+npm
+
+### Information
+
+##### 1) Install all required dependencies
+npm install
+
+##### 2) To start the server
+npm start
 
 
