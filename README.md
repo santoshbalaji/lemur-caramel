@@ -44,6 +44,9 @@ Result Format
 
 ## Flask Rest API (Python based)
 
+### Dependencies
+MongoDB Database
+
 ### Information:
 
 ##### 1) Install dependencies (Use python3)
@@ -55,4 +58,22 @@ python main.py
 ##### 3) Info on Running server (Multi Thread App Server) 
 Host: 127.0.0.1
 Port: 3000
+
+
+## Queue Management (Python and MQTT based)
+
+### Dependencies
+MongoDB Database
+Mosquitto MQTT Server 
+
+### Information:
+
+##### 1) Install dependencies (Use python3)
+pip install -r requirements.txt
+
+##### 2) To start application (Use python3)
+python main.py 
+
+
+
 
